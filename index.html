@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#000000">
+  <title>Đếm Ngược và Chuyển Hướng</title>
+  <link rel="icon" type="image/png" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/firework-burst-icon-v2.png">
+</head>
+<body>
+
+  <!-- Phần tử đếm ngược -->
+  <div class="countdown">
+    <h2>Pháo hoa sẽ bắt đầu sau: <span id="countdown-timer"></span></h2>
+  </div>
+
+  <script>
+    // Thêm 10 giây vào thời gian hiện tại
+    const targetDate = new Date().getTime() + 10 * 1000; // 10 giây (10 * 1000 ms)
+
+    // Phần tử countdown
+    const countdownTimer = document.getElementById("countdown-timer");
+
+    // Hàm cập nhật countdown
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeLeft = targetDate - now;
+
+      if (timeLeft > 0) {
+        const seconds = Math.floor(timeLeft / 1000); // Chỉ cần tính số giây còn lại
+
+        countdownTimer.textContent = `${seconds} giây còn lại`;
+      } else {
+        countdownTimer.textContent = "Chúc mừng Năm Mới!";
+        clearInterval(countdownInterval);
+
+        // Chuyển đến trang bắn pháo hoa
+        window.location.href = "fireworks.html"; // Thay "fireworks.html" bằng URL của trang bắn pháo hoa
+      }
+    }
+
+    // Cập nhật countdown mỗi giây
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Gọi ngay khi trang được tải
+    updateCountdown();
+  </script>
+
+</body>
+</html>
