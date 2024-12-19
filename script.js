@@ -2292,7 +2292,7 @@ if (IS_HEADER) {
 	init();
 } else {
 	// Allow status to render, then preload assets and start app.
-	setLoadingStatus('ANHCODE.CLICK');
+	setLoadingStatus('minhtruong1812.github.io/Mt/');
 	setTimeout(() => {
 		soundManager.preload()
 		.then(
@@ -2306,3 +2306,34 @@ if (IS_HEADER) {
 		);
 	}, 0);
 }
+
+// Đặt thời gian countdown (ví dụ: 10 giây)
+const countdownTime = 10; // Thời gian đếm ngược tính bằng giây
+let currentCountdown = countdownTime;
+
+// Phần tử countdown
+const countdownElement = document.getElementById("countdown-timer");
+const countdownContainer = document.querySelector(".countdown");
+
+// Hàm cập nhật countdown
+function startCountdown() {
+  const interval = setInterval(() => {
+    if (currentCountdown > 0) {
+      countdownElement.textContent = `${currentCountdown} giây`;
+      currentCountdown--;
+    } else {
+      clearInterval(interval);
+      countdownContainer.classList.add("hidden"); // Ẩn countdown
+      startFireworks(); // Bắt đầu pháo hoa
+    }
+  }, 1000);
+}
+
+// Hàm khởi động pháo hoa
+function startFireworks() {
+  const event = new Event("click");
+  document.querySelector(".canvas-container").dispatchEvent(event); // Giả lập hiệu ứng pháo hoa
+}
+
+// Bắt đầu countdown ngay khi tải trang
+startCountdown();

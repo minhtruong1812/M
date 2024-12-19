@@ -327,3 +327,17 @@ body {
   transition-timing-function: ease-out;
   transition-duration: 0.4s;
 }
+.countdown {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  font-size: 36px;
+  text-align: center;
+  z-index: 10;
+}
+.countdown.hidden {
+  display: none;
+}
