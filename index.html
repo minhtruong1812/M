@@ -16,35 +16,40 @@
   </div>
 
   <script>
-    // Thêm 10 giây vào thời gian hiện tại
-    const targetDate = new Date().getTime() + 10 * 1000; // 10 giây (10 * 1000 ms)
+    
+// Ngày đích (1/1/2025)
+const targetDate = new Date("2025-01-01T00:00:00");
 
-    // Phần tử countdown
-    const countdownTimer = document.getElementById("countdown-timer");
+// Phần tử countdown
+const countdownTimer = document.getElementById("countdown-timer");
 
-    // Hàm cập nhật countdown
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const timeLeft = targetDate - now;
+// Hàm cập nhật countdown
+function updateCountdown() {
+  const now = new Date();
+  const timeLeft = targetDate - now;
 
-      if (timeLeft > 0) {
-        const seconds = Math.floor(timeLeft / 1000); // Chỉ cần tính số giây còn lại
+  if (timeLeft > 0) {
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-        countdownTimer.textContent = `${seconds} giây còn lại`;
-      } else {
-        countdownTimer.textContent = "Chúc mừng Năm Mới!";
-        clearInterval(countdownInterval);
+    countdownTimer.textContent = `${days} ngày, ${hours} giờ, ${minutes} phút, ${seconds} giây`;
+  } else {
+    countdownTimer.textContent = "Chúc mừng Năm Mới 2025!";
+    clearInterval(countdownInterval);
 
-        // Chuyển đến trang bắn pháo hoa
-        window.location.href = "fireworks.html"; // Thay "fireworks.html" bằng URL của trang bắn pháo hoa
-      }
-    }
+    // Ẩn countdown và hiển thị phần bắn pháo hoa
+    document.querySelector('.countdown').style.display = 'none';
+    document.querySelector('.stage-container').classList.remove('remove');
+  }
+}
 
-    // Cập nhật countdown mỗi giây
-    const countdownInterval = setInterval(updateCountdown, 1000);
+// Cập nhật countdown mỗi giây
+const countdownInterval = setInterval(updateCountdown, 1000);
 
-    // Gọi ngay khi trang được tải
-    updateCountdown();
+// Gọi ngay khi trang được tải
+updateCountdown();
   </script>
 
 </body>
