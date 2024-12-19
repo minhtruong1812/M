@@ -2307,33 +2307,33 @@ if (IS_HEADER) {
 	}, 0);
 }
 
-// Đặt thời gian countdown (ví dụ: 10 giây)
-const countdownTime = 10; // Thời gian đếm ngược tính bằng giây
-let currentCountdown = countdownTime;
+// Thêm 10 giây vào thời gian hiện tại
+const targetDate = new Date().getTime() + 10 * 1000; // 10 giây (10 * 1000 ms)
 
 // Phần tử countdown
-const countdownElement = document.getElementById("countdown-timer");
-const countdownContainer = document.querySelector(".countdown");
+const countdownTimer = document.getElementById("countdown-timer");
 
 // Hàm cập nhật countdown
-function startCountdown() {
-  const interval = setInterval(() => {
-    if (currentCountdown > 0) {
-      countdownElement.textContent = `${currentCountdown} giây`;
-      currentCountdown--;
-    } else {
-      clearInterval(interval);
-      countdownContainer.classList.add("hidden"); // Ẩn countdown
-      startFireworks(); // Bắt đầu pháo hoa
-    }
-  }, 1000);
+function updateCountdown() {
+  const now = new Date().getTime();
+  const timeLeft = targetDate - now;
+
+  if (timeLeft > 0) {
+    const seconds = Math.floor(timeLeft / 1000); // Chỉ cần tính số giây còn lại
+
+    countdownTimer.textContent = `${seconds} giây còn lại`;
+  } else {
+    countdownTimer.textContent = "Chúc mừng Năm Mới!";
+    clearInterval(countdownInterval);
+
+    // Ẩn countdown và hiển thị phần bắn pháo hoa
+    document.querySelector('.countdown').style.display = 'none';
+    document.querySelector('.stage-container').classList.remove('remove');
+  }
 }
 
-// Hàm khởi động pháo hoa
-function startFireworks() {
-  const event = new Event("click");
-  document.querySelector(".canvas-container").dispatchEvent(event); // Giả lập hiệu ứng pháo hoa
-}
+// Cập nhật countdown mỗi giây
+const countdownInterval = setInterval(updateCountdown, 1000);
 
-// Bắt đầu countdown ngay khi tải trang
-startCountdown();
+// Gọi ngay khi trang được tải
+updateCountdown();
