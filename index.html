@@ -2,55 +2,110 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#000000">
-  <title>Đếm Ngược và Chuyển Hướng</title>
-  <link rel="icon" type="image/png" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/329180/firework-burst-icon-v2.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pháo hoa sẽ bắt đầu sau</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('https://source.unsplash.com/1920x1080/?fireworks,newyear') no-repeat center center/cover;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .countdown-container {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+
+    .title {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ffcc00;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .time {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .time span {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ffcc00;
+    }
+
+    .label {
+      font-size: 1rem;
+      text-transform: uppercase;
+      margin-top: 5px;
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Phần tử đếm ngược -->
-  <div class="countdown">
-    <h2>Pháo hoa sẽ bắt đầu sau: <span id="countdown-timer"></span></h2>
+  <div class="countdown-container">
+    <h1 class="title">Countdown đến Năm Mới</h1>
+    <div class="countdown">
+      <div class="time">
+        <span id="days">00</span>
+        <span class="label">Ngày</span>
+      </div>
+      <div class="time">
+        <span id="hours">00</span>
+        <span class="label">Giờ</span>
+      </div>
+      <div class="time">
+        <span id="minutes">00</span>
+        <span class="label">Phút</span>
+      </div>
+      <div class="time">
+        <span id="seconds">00</span>
+        <span class="label">Giây</span>
+      </div>
+    </div>
   </div>
-
   <script>
-    
-// Ngày đích (1/1/2025)
-const targetDate = new Date("2025-01-01T00:00:00");
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minutesEl = document.getElementById('minutes');
+    const secondsEl = document.getElementById('seconds');
 
-// Phần tử countdown
-const countdownTimer = document.getElementById("countdown-timer");
+    // Thời gian đếm ngược đến 00:00 ngày 1/1 năm mới
+    const targetDate = new Date(`January 1, ${new Date().getFullYear() + 1} 00:00:00`).getTime();
 
-// Hàm cập nhật countdown
-function updateCountdown() {
-  const now = new Date();
-  const timeLeft = targetDate - now;
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const timeRemaining = targetDate - now;
 
-  if (timeLeft > 0) {
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
-    countdownTimer.textContent = `${days} ngày, ${hours} giờ, ${minutes} phút, ${seconds} giây`;
-  } else {
-    countdownTimer.textContent = "Chúc mừng Năm Mới 2025!";
-    clearInterval(countdownInterval);
+      daysEl.textContent = days.toString().padStart(2, '0');
+      hoursEl.textContent = hours.toString().padStart(2, '0');
+      minutesEl.textContent = minutes.toString().padStart(2, '0');
+      secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
 
-    // Ẩn countdown và hiển thị phần bắn pháo hoa
-    document.querySelector('.countdown').style.display = 'none';
-    document.querySelector('.stage-container').classList.remove('remove');
-  }
-}
-
-// Cập nhật countdown mỗi giây
-const countdownInterval = setInterval(updateCountdown, 1000);
-
-// Gọi ngay khi trang được tải
-updateCountdown();
+    // Cập nhật mỗi giây
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
   </script>
-
 </body>
 </html>
