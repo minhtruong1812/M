@@ -2306,34 +2306,3 @@ if (IS_HEADER) {
 		);
 	}, 0);
 }
-
-// Thêm 10 giây vào thời gian hiện tại
-const targetDate = new Date().getTime() + 10 * 1000; // 10 giây (10 * 1000 ms)
-
-// Phần tử countdown
-const countdownTimer = document.getElementById("countdown-timer");
-
-// Hàm cập nhật countdown
-function updateCountdown() {
-  const now = new Date().getTime();
-  const timeLeft = targetDate - now;
-
-  if (timeLeft > 0) {
-    const seconds = Math.floor(timeLeft / 1000); // Chỉ cần tính số giây còn lại
-
-    countdownTimer.textContent = `${seconds} giây còn lại`;
-  } else {
-    countdownTimer.textContent = "Chúc mừng Năm Mới!";
-    clearInterval(countdownInterval);
-
-    // Ẩn countdown và hiển thị phần bắn pháo hoa
-    document.querySelector('.countdown').style.display = 'none';
-    document.querySelector('.stage-container').classList.remove('remove');
-  }
-}
-
-// Cập nhật countdown mỗi giây
-const countdownInterval = setInterval(updateCountdown, 1000);
-
-// Gọi ngay khi trang được tải
-updateCountdown();
