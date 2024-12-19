@@ -6,16 +6,37 @@
   <title>Pháo hoa sẽ bắt đầu sau</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: url('https://source.unsplash.com/1920x1080/?fireworks,newyear') no-repeat center center/cover;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('https://source.unsplash.com/1920x1080/?fireworks,newyear') no-repeat center center/cover;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  background-size: cover; /* Đảm bảo hình nền phủ hết màn hình */
+  background-position: center center; /* Đảm bảo hình nền luôn căn giữa */
+}
+
+/* Media Queries để điều chỉnh background cho thiết bị di động */
+@media (max-width: 768px) {
+  body {
+    background: url('https://source.unsplash.com/1280x720/?fireworks,newyear') no-repeat center center/cover;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    background: url('https://source.unsplash.com/800x600/?fireworks,newyear') no-repeat center center/cover;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    background: url('https://source.unsplash.com/640x480/?fireworks,newyear') no-repeat center center/cover;
+  }
+}
 
     .countdown-container {
       text-align: center;
