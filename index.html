@@ -81,13 +81,13 @@
     }
 
     /* Media Queries để điều chỉnh kích thước trên các thiết bị khác nhau */
-    @media (max-width: 600px) {
+    @media (max-width: 400px) {
       .title {
-        font-size: 8vw;
+        font-size: 6vw;
       }
 
       .time span {
-        font-size: 20vw;
+        font-size: 10vw;
       }
 
       .label {
@@ -95,17 +95,17 @@
       }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 200px) {
       .title {
-        font-size: 10vw;
+        font-size: 8vw;
       }
 
       .time span {
-        font-size: 25vw;
+        font-size: 15vw;
       }
 
       .label {
-        font-size: 6vw;
+        font-size: 4vw;
       }
     }
   </style>
@@ -139,7 +139,7 @@
     const secondsEl = document.getElementById('seconds');
 
     // Thời gian đếm ngược đến 00:00 ngày 1/1/2025
-    const targetDate = new Date('January 1, 2025 00:00:00').getTime();
+    const targetDate = new Date('December 21, 2024 00:50:10').getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
